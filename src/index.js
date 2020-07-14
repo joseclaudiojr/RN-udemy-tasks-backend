@@ -1,27 +1,22 @@
 const express = require('express')
-const config = require('./config/keys')
-const bodyParser = require('body-parser')
-const {Sequelize} = require('sequelize')
+const path = require('path')
 
-let sequelize = new Sequelize(config.mysqlURI)
-async function testDB() {
-	try {
-		await sequelize.authenticate()
-		console.log('Connection has been established successfully.')
-	} catch (error) {
-		console.error('Unable to connect to the database:', error)
-	}
-}
-// testDB()
-
+// const config = require('../../config/keys')
 const app = express()
 
-app.use(bodyParser.json())
+const consign = require('consign')
+consign({cwd: path.join(__dirname)})
+	.include('config/keys.js')
+	.then('database/db.js')
+	.then('middlewares')
+	.then('api')
+	.then('routes')
+	.into(app)
 
 app.get('/', (req, res) => {
 	res.status(200).send('Hello World')
 })
 
 app.listen(3000, () => {
-	console.log('Listening')
+	console.log('Listening on port 3000')
 })
