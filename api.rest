@@ -1,0 +1,12 @@
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+### Create an Account
+POST {{baseUrl}}/signup
+Content-Type: {{contentType}}
+
+{
+    "name":"Juca",
+    "email":"juca@juca.com",
+    "password":"juca"
+}
