@@ -10,7 +10,7 @@ module.exports = (app) => {
 	const save = (req, res) => {
 		generateHash(req.body.password, (hash) => {
 			const password = hash
-			app.database.db.models.user
+			app.database.models.user
 				.create({
 					name: req.body.name,
 					email: req.body.email,
@@ -20,7 +20,7 @@ module.exports = (app) => {
 					res.status(204).send()
 				})
 				.catch((error) => {
-					res.status(400).json(error)
+					res.status(500).json(error)
 				})
 		})
 	}

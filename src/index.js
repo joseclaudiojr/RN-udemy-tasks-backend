@@ -6,6 +6,7 @@ const app = express()
 
 const consign = require('consign')
 consign({cwd: path.join(__dirname)})
+	.include('middlewares/passport.js')
 	.include('config/keys.js')
 	.then('database/db.js')
 	.then('middlewares')

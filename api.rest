@@ -10,3 +10,38 @@ Content-Type: {{contentType}}
     "email":"juca@juca.com",
     "password":"juca"
 }
+
+### Auth an User
+POST {{baseUrl}}/signin
+Content-Type: {{contentType}}
+
+{
+    "email":"juca@juca.com",
+    "password":"juca"
+}
+
+### Save Task (auth required)
+POST {{baseUrl}}/tasks
+Content-Type: {{contentType}}
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.BCMUoe29pVuiThRMJK8C8-mEynrG-znvNlNOePyzG18
+
+{
+    "desc":"Teste2",
+    "estimateAt":"2020-07-17"
+}
+
+### Get Tasks (auth required)
+GET {{baseUrl}}/tasks
+Content-Type: {{contentType}}
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.BCMUoe29pVuiThRMJK8C8-mEynrG-znvNlNOePyzG18
+
+
+### Toggle Task (auth required)
+PUT {{baseUrl}}/tasks/1/toggle
+Content-Type: {{contentType}}
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.BCMUoe29pVuiThRMJK8C8-mEynrG-znvNlNOePyzG18
+
+### Delete a Task (auth required)
+DELETE {{baseUrl}}/tasks/4
+Content-Type: {{contentType}}
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.BCMUoe29pVuiThRMJK8C8-mEynrG-znvNlNOePyzG18
