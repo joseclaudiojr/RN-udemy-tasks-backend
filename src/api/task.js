@@ -15,7 +15,7 @@ module.exports = (app) => {
 			.then((tasks) => {
 				res.json(tasks)
 			})
-			.catch((err) => res.status(400).json(err))
+			.catch((err) => res.status(400).send(err.errors[0].message))
 	}
 	const save = (req, res) => {
 		if (!req.body.desc.trim()) {
@@ -35,7 +35,7 @@ module.exports = (app) => {
 				res.status(204).send()
 			})
 			.catch((error) => {
-				res.status(500).json(error)
+				res.status(400).send(error.errors[0].message)
 			})
 	}
 
@@ -52,7 +52,7 @@ module.exports = (app) => {
 					res.status(400).send(msg)
 				}
 			})
-			.catch((err) => res.status(400).json(err))
+			.catch((err) => res.status(400).send(err.errors[0].message))
 	}
 
 	const updateTaskDoneAt = (req, res, doneAt) => {
@@ -70,7 +70,7 @@ module.exports = (app) => {
 				res.status(204).send()
 			})
 			.catch((err) => {
-				res.status(400).json(err)
+				res.status(400).send(err.errors[0].message)
 			})
 	}
 
@@ -90,7 +90,7 @@ module.exports = (app) => {
 				const doneAt = task.doneAt ? null : new Date()
 				updateTaskDoneAt(req, res, doneAt)
 			})
-			.catch((err) => res.status(400).json(err))
+			.catch((err) => res.status(400).send(err.errors[0].message))
 	}
 	return {
 		getTasks,

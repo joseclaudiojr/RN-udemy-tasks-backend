@@ -7,7 +7,7 @@ module.exports = (app) => {
 		if (!req.body.email || !req.body.password)
 			return res.status(400).send('Dados incompletos')
 		const user = await app.database.db.models.user.findOne({
-			where: {email: req.body.email},
+			where: {email: req.body.email.toLowerCase()},
 		})
 		if (user) {
 			bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
